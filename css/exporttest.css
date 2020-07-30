@@ -1,0 +1,37 @@
+body {
+    color:black;
+    overflow: hidden;
+    margin: 2px;
+    padding: 0px;
+    background: white;
+}
+
+div:first-child {
+    margin-top: 0px;
+}
+div {
+    text-align: left;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 1.0em;
+    width: 130px;
+}
+div:hover {
+    background-color:lightgray;
+}
+
+.exec {
+    border: 1px solid white;
+    text-align: center;
+    margin: 5px;
+    padding: 3px;
+    background-color: lightblue;
+}
+.exec:hover {
+    color:white;
+    background-color: #0F73B4;
+}
+
+.smalltext {
+    font-size: 0.6em;
+}

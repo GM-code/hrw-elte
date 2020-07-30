@@ -1,0 +1,36 @@
+{
+  "name": "HRW E-Learning Test Exporter",
+  "description": "Filter, export, and print single E-Learning tests",
+  "version": "0.0.0.1",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "declarativeContent"
+  ],
+  "page_action": {
+    "default_title": "HRW E-Learning Test Exporter",
+    "default_icon": {
+      "64": "images/logo64.png"
+    },
+    "default_popup": "exporttest.html"
+  },
+  "icons": {
+    "64": "images/logo64.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "https://elearning.hs-ruhrwest.de/mod/quiz/*" ],
+      "js": [
+        "js-external/jszip.min.js",
+        "js-external/jszip-utils.min.js",
+        "js-external/FileSaver.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [ "js/background.js" ],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
