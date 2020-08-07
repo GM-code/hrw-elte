@@ -20,31 +20,28 @@
 
 'use strict';
 
-// Cleanup
+// Header
 document.querySelectorAll('#page-header > div > div').forEach(item => {
     item.style.backgroundColor = 'white';
     item.style.backgroundSize = '100% 100%';
-    item.style.color = 'black';
+    item.style.color = 'white';
 });
 
-// set top header
-document.querySelectorAll('#page-wrapper > nav').forEach(item => { item.style.display = 'flex'; });
+var changeDisplayElements = [
+    '#page-wrapper > nav', //top header
+    'footer', // footer
+    '#mod_quiz_navblock', // quiz navigation
+    '#dropdown-3', '#back-to-top', '.context-header-settings-menu', // some ui elements
+    '#region-main > div > div > div.m-t-2.m-b-1', '.mod_quiz-next-nav', '.submitbtns' // navigation below test items
+];
 
-// set footer
-document.querySelectorAll('footer').forEach(item => { item.style.display = 'flex'; });
-
-// set quiz navigation
-document.querySelectorAll('#mod_quiz_navblock').forEach(item => { item.style.display = 'flex'; });
-
-// set some ui elements
-document.querySelectorAll('#dropdown-3').forEach(item => { item.style.display = 'flex'; });
-document.querySelectorAll('#back-to-top').forEach(item => { item.style.display = 'flex'; });
-document.querySelectorAll('.context-header-settings-menu').forEach(item => { item.style.display = 'flex'; });
-
-// set navigation below test items
-document.querySelectorAll('#region-main > div > div > div.m-t-2.m-b-1').forEach(item => { item.style.display = 'flex'; });
-document.querySelectorAll('.mod_quiz-next-nav').forEach(item => { item.style.display = 'flex'; });
-document.querySelectorAll('.submitbtns').forEach(item => { item.style.display = 'flex'; });
+changeDisplayElements.forEach(
+    selector => {
+        document.querySelectorAll(selector).forEach(
+            item => { item.style.display = 'flex'; }
+        )
+    }
+);
 
 // set background
 document.querySelectorAll('body').forEach(item => { item.style.backgroundColor = '#f4f4f4'; });
