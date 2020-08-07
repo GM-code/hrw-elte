@@ -21,10 +21,10 @@
 chrome.runtime.onInstalled.addListener(function () {
     chrome.storage.local.set(
         {
-            layout: true,
-            history: true,
-            comment: false,
-            outcome: false,
+            showhistory: true,
+            showcomment: true,
+            showoutcome: true,
+            simplelayout: false,
         }
     );
 

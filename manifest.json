@@ -1,7 +1,7 @@
 {
   "name": "HRW E-Learning Test Exporter",
   "description": "Filter, export, and print single E-Learning tests",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "permissions": [
     "activeTab",
     "storage",

@@ -28,59 +28,72 @@ function runPrint(e) {
     chrome.tabs.executeScript({ code: 'window.print();' });
 }
 
-function runFilter(e) {
-    let stripHistory = document.querySelector("#history").checked;
-    let stripComment = document.querySelector("#comment").checked;
-    let stripOutcome = document.querySelector("#outcome").checked;
+function updateLayout(e) {
     let stripLayout = document.querySelector("#layout").checked;
-
-    if (stripHistory) {
-        chrome.tabs.executeScript({
-            code:"document.querySelectorAll('.history').forEach(item => { item.style.display = 'none'; });"
-        });
-    }
-    if (stripComment) {
-        chrome.tabs.executeScript({
-            code: "document.querySelectorAll('.comment').forEach(item => { item.style.display = 'none'; });"
-        });
-    }
-    if (stripOutcome) {
-        chrome.tabs.executeScript({
-            code:"document.querySelectorAll('.outcome').forEach(item => { item.style.display = 'none'; });"
-        });
-    }
     if (stripLayout) {
-        chrome.tabs.executeScript({ file: 'js/injections/simplifylayout.js' });
+        chrome.tabs.executeScript({ file: 'js/injections/simplelayout.js' });
+    }
+    else {
+        chrome.tabs.executeScript({ file: 'js/injections/normallayout.js' });
+//        chrome.tabs.executeScript({ code: 'location.reload();' });
     }
 }
 
+function updateHistory() {
+    let showComment = document.querySelector("#comment").checked ? 'block' : 'none';
+    chrome.tabs.executeScript({
+        code: "document.querySelectorAll('.comment').forEach(item => { item.style.display = '" + showComment + "'; });"
+    });
+}
+function updateComment() {
+    let showHistory = document.querySelector("#history").checked ? 'flex' : 'none';
+    chrome.tabs.executeScript({
+        code: "document.querySelectorAll('.history').forEach(item => { item.style.display = '" + showHistory + "'; });"
+    });
+}
+function updateOutcome() {
+    let showOutcome = document.querySelector("#outcome").checked ? 'block' : 'none';
+    chrome.tabs.executeScript({
+        code: "document.querySelectorAll('.outcome').forEach(item => { item.style.display = '" + showOutcome + "'; });"
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     chrome.storage.local.get(null, function (data) {
-        document.querySelector("#history").checked = data.history;
-        document.querySelector("#comment").checked = data.comment;
-        document.querySelector("#outcome").checked = data.outcome;
-        document.querySelector("#layout").checked = data.layout;
+        document.querySelector("#history").checked = data.showhistory;
+        document.querySelector("#comment").checked = data.showcomment;
+        document.querySelector("#outcome").checked = data.showoutcome;
+        document.querySelector("#layout").checked = data.simplelayout;
+
+        updateHistory();
+        updateComment();
+        updateOutcome();
+        if (document.querySelector("#layout").checked) {
+            updateLayout();
+        }
     });
 
-    document.querySelector('#apply').addEventListener('click', runFilter);
     document.querySelector('#print').addEventListener('click', runPrint);
     document.querySelector('#download').addEventListener('click', runDownload);
 
     const checkboxHistory = document.querySelector('#history');
     checkboxHistory.addEventListener('change', (event) => {
-        chrome.storage.local.set({ history: event.target.checked });
+        chrome.storage.local.set({ showhistory: event.target.checked });
+        updateComment();
     });
     const checkboxComment = document.querySelector('#comment');
     checkboxComment.addEventListener('change', (event) => {
-        chrome.storage.local.set({ comment: event.target.checked });
+        chrome.storage.local.set({ showcomment: event.target.checked });
+        updateHistory();
     });
     const checkboxOutcome = document.querySelector('#outcome');
     checkboxOutcome.addEventListener('change', (event) => {
-        chrome.storage.local.set({ outcome: event.target.checked });
+        chrome.storage.local.set({ showoutcome: event.target.checked });
+        updateOutcome();
     });
     const checkboxLayout = document.querySelector('#layout');
     checkboxLayout.addEventListener('change', (event) => {
-        chrome.storage.local.set({ layout: event.target.checked });
+        chrome.storage.local.set({ simplelayout: event.target.checked });
+        updateLayout();
     });
 });
