@@ -35,7 +35,6 @@ function updateLayout(e) {
     }
     else {
         chrome.tabs.executeScript({ file: 'js/injections/normallayout.js' });
-//        chrome.tabs.executeScript({ code: 'location.reload();' });
     }
 }
 

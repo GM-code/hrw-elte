@@ -19,7 +19,7 @@
   },
   "content_scripts": [
     {
-      "matches": [ "https://elearning.hs-ruhrwest.de/mod/quiz/*" ],
+      "matches": [ "https://elearning.hs-ruhrwest.de/mod/quiz/review.php/*" ],
       "js": [
         "js-external/jszip.min.js",
         "js-external/jszip-utils.min.js",
