@@ -21,8 +21,15 @@
 'use strict';
 
 function runDownload(e) {
-    chrome.tabs.executeScript({ file: 'js/injections/saveattachments.js' });
-}
+    chrome.tabs.executeScript(null, { file: "js-external/jszip.min.js" }, function () {
+        chrome.tabs.executeScript(null, { file: "js-external/jszip-utils.min.js" }, function () {
+            chrome.tabs.executeScript(null, { file: "js-external/FileSaver.min.js" }, function () {
+                chrome.tabs.executeScript({ file: 'js/injections/saveattachments.js' }
+                );
+            });
+        });
+    });
+};
 
 function runPrint(e) {
     chrome.tabs.executeScript({ code: 'window.print();' });
