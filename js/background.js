@@ -21,6 +21,7 @@
 chrome.runtime.onInstalled.addListener(function () {
     chrome.storage.local.set(
         {
+            showqtext: true,
             showhistory: true,
             showcomment: true,
             showoutcome: true,

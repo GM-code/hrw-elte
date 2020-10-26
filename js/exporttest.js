@@ -45,16 +45,22 @@ function updateLayout(e) {
     }
 }
 
-function updateHistory() {
-    let showComment = document.querySelector("#comment").checked ? 'block' : 'none';
+function updateQtext() {
+    let showQuestion = document.querySelector("#qtext").checked ? 'block' : 'none';
     chrome.tabs.executeScript({
-        code: "document.querySelectorAll('.comment').forEach(item => { item.style.display = '" + showComment + "'; });"
+        code: "document.querySelectorAll('.qtext').forEach(item => { item.style.display = '" + showQuestion + "'; });"
     });
 }
-function updateComment() {
+function updateHistory() {
     let showHistory = document.querySelector("#history").checked ? 'flex' : 'none';
     chrome.tabs.executeScript({
         code: "document.querySelectorAll('.history').forEach(item => { item.style.display = '" + showHistory + "'; });"
+    });
+}
+function updateComment() {
+    let showComment = document.querySelector("#comment").checked ? 'block' : 'none';
+    chrome.tabs.executeScript({
+        code: "document.querySelectorAll('.comment').forEach(item => { item.style.display = '" + showComment + "'; });"
     });
 }
 function updateOutcome() {
@@ -66,11 +72,13 @@ function updateOutcome() {
 
 document.addEventListener('DOMContentLoaded', function () {
     chrome.storage.local.get(null, function (data) {
+        document.querySelector("#qtext").checked = data.showqtext;
         document.querySelector("#history").checked = data.showhistory;
         document.querySelector("#comment").checked = data.showcomment;
         document.querySelector("#outcome").checked = data.showoutcome;
         document.querySelector("#layout").checked = data.simplelayout;
 
+        updateQtext();
         updateHistory();
         updateComment();
         updateOutcome();
@@ -82,15 +90,20 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#print').addEventListener('click', runPrint);
     document.querySelector('#download').addEventListener('click', runDownload);
 
+    const checkboxQtext = document.querySelector('#qtext');
+    checkboxQtext.addEventListener('change', (event) => {
+        chrome.storage.local.set({ showqtext: event.target.checked });
+        updateQtext();
+    });
     const checkboxHistory = document.querySelector('#history');
     checkboxHistory.addEventListener('change', (event) => {
         chrome.storage.local.set({ showhistory: event.target.checked });
-        updateComment();
+        updateHistory();
     });
     const checkboxComment = document.querySelector('#comment');
     checkboxComment.addEventListener('change', (event) => {
         chrome.storage.local.set({ showcomment: event.target.checked });
-        updateHistory();
+        updateComment();
     });
     const checkboxOutcome = document.querySelector('#outcome');
     checkboxOutcome.addEventListener('change', (event) => {
