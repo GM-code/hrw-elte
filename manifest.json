@@ -1,14 +1,13 @@
 {
   "name": "E-Learning Test Exporter",
   "description": "Filter, export, and print single E-Learning tests",
-  "version": "0.0.0.5",
+  "version": "0.0.0.6",
   "homepage_url": "https://github.com/GM-code/hrw-elte",
 
   "permissions": [
     "activeTab",
     "storage",
-    "declarativeContent",
-    "https://elearning.hs-ruhrwest.de/mod/quiz/review.php*"
+    "declarativeContent"
   ],
   "page_action": {
     "default_title": "E-Learning Test Exporter",
