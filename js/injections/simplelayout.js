@@ -42,7 +42,7 @@ var changeDisplayElements = [
     '#mod_quiz_navblock', // quiz navigation
     '#dropdown-3', '#back-to-top', '.context-header-settings-menu', // some ui elements
     '#region-main > div > div > div.m-t-2.m-b-1', '.mod_quiz-next-nav', '.submitbtns', // navigation below test items
-    '.commentlink'
+    //'.commentlink'
 ];
 
 changeDisplayElements.forEach(
