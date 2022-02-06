@@ -39,6 +39,14 @@ chrome.runtime.onInstalled.addListener(function () {
                     schemes: ['https']
                 },
             }),
+            new chrome.declarativeContent.PageStateMatcher({
+                pageUrl: {
+                    hostEquals: 'onlinepruefung.hs-ruhrwest.de',
+                    pathEquals: '/mod/quiz/review.php',
+                    queryPrefix: 'attempt',
+                    schemes: ['https']
+                },
+            }),
         ],
         actions: [
             new chrome.declarativeContent.ShowPageAction()

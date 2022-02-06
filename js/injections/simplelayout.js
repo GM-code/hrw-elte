@@ -1,5 +1,5 @@
 /*
-    Copyright(c) 2020 Gordon Mueller
+    Copyright(c) 2020-2022 Gordon Mueller
 
     This software is provided 'as-is', without any express or implied
     warranty. In no event will the authors be held liable for any damages
@@ -41,7 +41,8 @@ var changeDisplayElements = [
     'footer', // footer
     '#mod_quiz_navblock', // quiz navigation
     '#dropdown-3', '#back-to-top', '.context-header-settings-menu', // some ui elements
-    '#region-main > div > div > div.m-t-2.m-b-1', '.mod_quiz-next-nav', '.submitbtns' // navigation below test items
+    '#region-main > div > div > div.m-t-2.m-b-1', '.mod_quiz-next-nav', '.submitbtns', // navigation below test items
+    '.commentlink'
 ];
 
 changeDisplayElements.forEach(
